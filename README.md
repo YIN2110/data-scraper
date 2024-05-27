@@ -1,57 +1,14 @@
-# data-scraper
-Project for retrieving course information from Udemy using their Affiliate API
-# Udemy Data Scraper
+# CarModelRecognition
 
-This project aims to retrieve course information from Udemy using their Affiliate API. The collected data will include course titles, descriptions, instructors, and ratings, which will be used to create a comprehensive educational resource database. This will help users find and compare online courses effectively.
+CarModelRecognition是一个基于图像算法的开源项目，旨在实现对车辆的粒度级别识别。该项目利用计算机视觉和深度学习技术，通过分析车辆图像来准确识别车型，并将其归类到不同的车辆类型中。
 
-## Project Objectives
+1. 数据收集与预处理：首先需要收集包含不同车型的图像数据集。这些图像可以从公开的数据集、网络上或者自己采集。然后，对收集到的图像进行预处理，包括调整图像大小、裁剪、去除噪声等操作，以便提高后续算法的准确性。
 
-- Retrieve course information from Udemy.
-- Parse and store the data in a structured format.
-- Provide a user-friendly interface to search and compare courses.
+2. 数据标注与注释：对收集到的图像数据进行标注，即给每个图像分配正确的车型标签。可以使用手动标注或半自动标注的方式。标注的准确性对于训练和评估模型非常重要。
 
-## How to Use the Udemy API
+3. 模型选择与训练：选择适合车型识别任务的深度学习模型，如卷积神经网络（CNN）。根据数据集的规模和复杂性，选择合适的预训练模型或者自行设计网络架构。然后，将数据集划分为训练集和验证集，使用训练集对模型进行训练，并通过验证集进行模型调优，直到达到满意的性能。
 
-To use the Udemy Affiliate API, follow these steps:
+4. 模型评估与调优：使用测试集评估训练好的模型在车型识别任务上的性能。评估指标可以包括准确率、召回率、精确率等。根据评估结果，可以进一步调优模型的超参数、数据增强方法等，以提高模型的性能。
 
-1. **Register for API Access**:
-   - Visit the [Udemy Developer Portal](https://www.udemy.com/developers/affiliate).
-   - Register for an API client and provide the necessary information.
-   - Once approved, you will receive your `client_id` and `client_secret`.
+5. 部署与应用：当模型训练和调优完成后，可以将其部署到实际应用中。这可以包括将模型集成到移动应用程序、网站或者其他系统中，以实现实时的车型识别功能。
 
-2. **Authenticate and Fetch Data**:
-   - Use the provided credentials to authenticate and fetch course data.
-   - Below is an example code snippet to get you started.
-
-### Example Code
-
-```python
-import requests
-import base64
-
-# Replace with your actual client_id and client_secret
-client_id = 'your_client_id'
-client_secret = 'your_client_secret'
-
-# Generate the basic authentication header
-auth = base64.b64encode(f'{client_id}:{client_secret}'.encode()).decode()
-
-headers = {
-    'Authorization': f'Basic {auth}',
-    'Content-Type': 'application/json'
-}
-
-# Send request to Udemy API to fetch courses
-response = requests.get('https://www.udemy.com/api-2.0/courses/', headers=headers)
-
-if response.status_code == 200:
-    data = response.json()
-    # Print the retrieved data
-    print(data)
-else:
-    print(f"Failed to retrieve data, status code: {response.status_code}")
-
-    data = response.json()
-    print(data)
-else:
-    print(f"Failed to retrieve data, status code: {response.status_code}")
